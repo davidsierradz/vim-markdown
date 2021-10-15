@@ -28,7 +28,9 @@ if !exists("g:no_plugin_maps") && !exists("g:no_markdown_maps")
 endif
 
 function! s:NotCodeBlock(lnum) abort
-  return synIDattr(synID(a:lnum, 1, 1), 'name') !=# 'markdownCode'
+  let id = synID(v:lnum, 1, 1)
+  let attr = synIDattr(id, 'name')
+  return attr !=# 'markdownCode' && attr !=# 'markdownCodeBlock'
 endfunction
 
 function! MarkdownFold() abort
